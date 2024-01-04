@@ -7,6 +7,7 @@ import java.sql.SQLException;
 public class DemoConnection1 {
 //	快捷main
 	public static void main(String[] args) {
+		Connection connection=null;
 		try {
 //			註冊 加載Driver
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -24,17 +25,21 @@ public class DemoConnection1 {
 			String user="gary1";
 			String password="5413gary";
 //			取得連線
-			Connection connection = DriverManager.getConnection(url,user,password);
+//			Connection connection = DriverManager.getConnection(url,user,password);
+			connection = DriverManager.getConnection(url,user,password);
 //			檢視連線
 			boolean status = !connection.isClosed();
 			System.out.println("連線狀態"+status);
 //			關閉連線
-			connection.close();
-			
+//			connection.close();
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}finally {
-			
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}			
 		}
 	}
 }

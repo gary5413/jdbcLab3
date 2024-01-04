@@ -27,6 +27,7 @@ public class DemoConnection3 {
 			Connection connection = DriverManager.getConnection(url,user,password);
 			boolean status = !connection.isClosed();
 			System.out.println("連線狀態"+status);
+			fileInputStream.close();
 			connection.close();
 			
 		} catch (ClassNotFoundException | SQLException | IOException e) {
