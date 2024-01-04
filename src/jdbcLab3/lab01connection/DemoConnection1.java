@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DemoConnection {
+public class DemoConnection1 {
 //	快捷main
 	public static void main(String[] args) {
 		try {
@@ -33,6 +33,8 @@ public class DemoConnection {
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+		}finally {
+			
 		}
 	}
 }
