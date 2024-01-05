@@ -1,5 +1,11 @@
 package jdbcLab3.lab07;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import jdbcLab3.util.JDBCutil;
+
 public class DemoTrasaction {
 	/*
 	 * 1. 什麼是資料庫事務
@@ -28,13 +34,76 @@ public class DemoTrasaction {
 	  			
 	  	交易的幾個問題
 	  	 髒讀
-	  	 	T1讀取已被T2更新但未commit資料 之後若T2rollback T1內容就是臨時且無效的
+	  	 	T1讀取已被T2更新但未commit資料 之後若T2 rollback T1內容就是臨時且無效的
 	  	 不可重複讀
 	  	 	T1 T2讀取同一個資料 然後T2更新資料後 T1在讀取直就不同了
 	  	 幻讀
 	  	 	T1 T2讀取同一個資料 然後T2插入新的資料後 如果T1在讀取同一資料就會多出幾行
 	 */
+	
+	public void updateBlance(Connection connection,String name,Integer balance) {
+		String sql="UPDATE account SET account_balance = ? WHERE account_name =?";
+		PreparedStatement prepareStatement=null;
+		try {
+			prepareStatement = connection.prepareStatement(sql);
+			prepareStatement.setString(2, name);
+			prepareStatement.setInt(1, balance);
+			prepareStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCutil.closeResource(null, prepareStatement);
+		}
+	}
+
+	
 	public static void main(String[] args) {
+		DemoTrasaction demoTrasaction = new DemoTrasaction();
+		Connection connection = JDBCutil.getConnection();
+//		示範交易失敗
+//		try {
+//			demoTrasaction.updateBlance(connection, "AA", 1500);
+//			System.out.println(10/0);
+//			demoTrasaction.updateBlance(connection, "BB", 1500);
+//		} catch (Exception e2) {
+//			e2.printStackTrace();
+//		}finally {
+//			JDBCutil.closeResource(connection);			
+//		}
+		
+		
+//		交易模式
+		try {
+//			開啟隱含交易
+			connection.setAutoCommit(false);
+			demoTrasaction.updateBlance(connection, "AA", 500);
+			System.out.println(10/0);
+			demoTrasaction.updateBlance(connection, "BB", 1500);
+//			提交
+			connection.commit();
+			System.out.println("轉帳成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+//				交易回滾
+				connection.rollback();
+				System.out.println("轉帳失敗");
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}finally {
+			try {
+				/*
+				 * 若此时 Connection 没有被关闭，还可能被重复使用，
+				 * 则需要恢复其自动提交状态 setAutoCommit(true)。
+				 * 尤其是在使用数据库连接池技术时，执行close()方法前，建议恢复自动提交状态。
+				 */
+				connection.setAutoCommit(true);
+				JDBCutil.closeResource(connection);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 
 	}
 
