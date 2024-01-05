@@ -47,16 +47,22 @@ public class DemoCreateStatement2 {
 		}
 	}
 
-	public void closeConection() throws Exception {
-		if (connection != null) {
-			connection.close();
-			System.out.println("關閉連線");
-		}
-		if (fileInputStream != null) {
-			fileInputStream.close();
-		}
-		if (statement != null) {
-			statement.close();
+	public void closeConection(){
+		try {
+			if (connection != null) {
+				connection.close();
+				System.out.println("關閉連線");
+			}
+			if (fileInputStream != null) {
+				fileInputStream.close();
+			}
+			if (statement != null) {
+				statement.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -68,23 +74,22 @@ public class DemoCreateStatement2 {
 			statement.execute(sql);
 			System.out.println("執行sql excute");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+
 	public static void main(String[] args) {
+		/*
+		 * 介紹實體化 甚麼是new 
+		 * 实例化是将类的抽象概念转化为在内存中实际存在的对象的过程。
+		 * 存入內存
+		 */
 		DemoCreateStatement2 demo2 = new DemoCreateStatement2();
 		demo2.createConnection();
 		demo2.insert();
-		try {
-			demo2.closeConection();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		demo2.closeConection();
 	
-
 	}
 
 }
