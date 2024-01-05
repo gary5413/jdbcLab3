@@ -44,6 +44,17 @@ public class JDBCutil {
 		return connection;
 	}
 	
+	public static void closeResource(Connection connection) {
+		try {
+			if(connection!=null) {
+				connection.close();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}	
+	
 	public static void closeResource(Connection connection,Statement statement) {
 		try {
 			if(connection!=null) {
