@@ -1,4 +1,4 @@
-package jdbcLab3.lab01connection;
+package jdbcLab3.lab01.connection;
 
 import java.io.File;
 import java.io.FileInputStream;

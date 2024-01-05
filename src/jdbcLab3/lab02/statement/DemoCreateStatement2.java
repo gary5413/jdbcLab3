@@ -1,4 +1,4 @@
-package jdbcLab3.lab02statement;
+package jdbcLab3.lab02.statement;
 
 import java.io.File;
 import java.io.FileInputStream;
