@@ -13,7 +13,7 @@ public class DemoConnection11 {
 			String password="5413gary";
 			try(Connection connection = DriverManager.getConnection(url,user,password)) {
 				boolean status = !connection.isClosed();
-				System.out.println("連線狀態"+status);
+				System.out.println("連線狀態"+status);                                                                                                                   
 				} catch (Exception e) {
 			}
 		} catch (ClassNotFoundException e) {
