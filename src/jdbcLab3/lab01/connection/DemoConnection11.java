@@ -2,7 +2,6 @@ package jdbcLab3.lab01.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class DemoConnection11 {
 	public static void main(String[] args) {
