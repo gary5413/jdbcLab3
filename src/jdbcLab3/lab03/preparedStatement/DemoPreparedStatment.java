@@ -8,7 +8,9 @@ import java.sql.SQLException;
 import jdbcLab3.util.JDBCutil;
 
 public class DemoPreparedStatment {
-	
+	/*
+	 * 這邊帶同學寫JDBCutil
+	 */
 //	新增
 	public void insert() {
 		String sql="INSERT INTO users(name,password,email)VALUES(?,?,?)";
