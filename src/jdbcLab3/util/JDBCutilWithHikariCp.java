@@ -28,6 +28,13 @@ public class JDBCutilWithHikariCp {
 		return connection;
 	}
 	
+	public static void closeResource(HikariDataSource ds) {
+		if(ds!=null) {
+			ds.close();
+		}
+	}
+	
+	
 	public static void closeResource(Connection conn,Statement pstmt) {
 		try {
 			if(pstmt !=null)

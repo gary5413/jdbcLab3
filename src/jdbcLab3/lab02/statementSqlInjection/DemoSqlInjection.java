@@ -116,43 +116,49 @@ public class DemoSqlInjection {
 	
 	public static void main(String[] args) {
 //		先示範這版本
-//		Scanner scanner = new Scanner(System.in);
-//		System.out.println("請輸入姓名");
-//		String name= scanner.nextLine();
-//		System.out.println("請輸入密碼");
-//		String password = scanner.nextLine();
-//		DemoSqlInjection demoSqlInjection = new DemoSqlInjection();
-//		demoSqlInjection.createConnection();
-//		Boolean loginCheck = demoSqlInjection.login(name, password);
-//		if(loginCheck) {
-//			System.out.println("登入成功");
-//		}else {
-//			System.out.println("登入失敗");
-//		}
-//		demoSqlInjection.closeConection();
-		
-//		加了迴圈
+		DemoSqlInjection demoSqlInjection = new DemoSqlInjection();;
 		Scanner scanner = new Scanner(System.in);
-		DemoSqlInjection demoSqlInjection = new DemoSqlInjection();
-		boolean status=true;
-		while (status) {
+		try {
 			System.out.println("請輸入姓名");
 			String name= scanner.nextLine();
 			System.out.println("請輸入密碼");
 			String password = scanner.nextLine();
 			demoSqlInjection.createConnection();
-//			Boolean loginCheck = demoSqlInjection.login(name, password);
-			Boolean loginCheck = demoSqlInjection.login2(name, password);
+			Boolean loginCheck = demoSqlInjection.login(name, password);
 			if(loginCheck) {
 				System.out.println("登入成功");
-				status=false;
 			}else {
 				System.out.println("登入失敗");
-				status=true;
 			}
-			demoSqlInjection.closeConection();
-			System.out.println("===================================================a");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			demoSqlInjection.closeConection();			
 		}
+		
+//		加了迴圈
+//		Scanner scanner = new Scanner(System.in);
+//		DemoSqlInjection demoSqlInjection = new DemoSqlInjection();
+//		boolean status=true;
+//		while (status) {
+//			System.out.println("請輸入姓名");
+//			String name= scanner.nextLine();
+//			System.out.println("請輸入密碼");
+//			String password = scanner.nextLine();
+//			demoSqlInjection.createConnection();
+////			Boolean loginCheck = demoSqlInjection.login(name, password);
+//			Boolean loginCheck = demoSqlInjection.login2(name, password);
+//			if(loginCheck) {
+//				System.out.println("登入成功");
+//				status=false;
+//			}else {
+//				System.out.println("登入失敗");
+//				status=true;
+//			}
+//			demoSqlInjection.closeConection();
+//			System.out.println("===================================================a");
+//		}
 		
 		
 		/*
