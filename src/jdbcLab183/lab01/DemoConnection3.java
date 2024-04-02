@@ -15,7 +15,7 @@ public class DemoConnection3 {
 		FileInputStream fileInputStream=null;
 		Connection connection=null;
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			Properties properties = new Properties();
 			fileInputStream = new FileInputStream(new File("src/jdbc183.properties"));
 			properties.load(fileInputStream);
