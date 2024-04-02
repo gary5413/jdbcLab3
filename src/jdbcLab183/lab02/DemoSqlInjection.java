@@ -4,11 +4,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 import java.util.Scanner;
+
+import jdbcLab183.utils.JDBCutil;
+
+
 
 public class DemoSqlInjection {
 	Connection connection = null;
@@ -57,6 +62,28 @@ public class DemoSqlInjection {
 		Boolean checkOk = rs.next();
 		return checkOk;
 	}
+	
+//	改寫login成preparedStatement寫法
+	public Boolean login2(String name,String password) {
+		Boolean checkOk=null;
+		String sql="SELECT name,password FROM users WHERE name = ? AND password =?";
+		Connection connection2 = JDBCutil.getConnection();
+		PreparedStatement preparedStatement =null;
+		ResultSet rs= null;
+		try {
+			preparedStatement = connection2.prepareStatement(sql);
+			preparedStatement.setString(1, name);
+			preparedStatement.setString(2, password);
+			rs = preparedStatement.executeQuery();
+			checkOk= rs.next();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCutil.closeResource(connection2, preparedStatement, rs);
+		}
+		
+		return checkOk;
+	}
 
 	public static void main(String[] args) {
 		DemoSqlInjection demoSqlInjection = new DemoSqlInjection();
@@ -66,8 +93,11 @@ public class DemoSqlInjection {
 			String name= scanner.nextLine();
 			System.out.println("請輸入密碼");
 			String password = scanner.nextLine();
-			demoSqlInjection.createConnection();
-			Boolean loginCheck = demoSqlInjection.login(name, password);
+//			demoSqlInjection.createConnection();
+//			Boolean loginCheck = demoSqlInjection.login(name, password);
+			
+			Boolean loginCheck = demoSqlInjection.login2(name, password);
+			
 			if(loginCheck) {
 				System.out.println("登入成功");
 			}else {
@@ -75,13 +105,14 @@ public class DemoSqlInjection {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				demoSqlInjection.closeConnection();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
+//		finally {
+//			try {
+//				demoSqlInjection.closeConnection();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
 	}
 
 }
