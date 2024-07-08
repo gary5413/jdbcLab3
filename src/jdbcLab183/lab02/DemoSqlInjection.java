@@ -93,10 +93,10 @@ public class DemoSqlInjection {
 			String name= scanner.nextLine();
 			System.out.println("請輸入密碼");
 			String password = scanner.nextLine();
-//			demoSqlInjection.createConnection();
-//			Boolean loginCheck = demoSqlInjection.login(name, password);
+			demoSqlInjection.createConnection();
+			Boolean loginCheck = demoSqlInjection.login(name, password);
 			
-			Boolean loginCheck = demoSqlInjection.login2(name, password);
+//			Boolean loginCheck = demoSqlInjection.login2(name, password);
 			
 			if(loginCheck) {
 				System.out.println("登入成功");

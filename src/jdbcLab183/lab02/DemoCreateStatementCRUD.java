@@ -60,8 +60,26 @@ public class DemoCreateStatementCRUD {
 		System.out.println("執行刪除法方,刪除userId為"+userId);
 	}
 	
+	public void deleteUserByName(String userName) throws Exception {
+		String sql="DELETE FROM users WHERE name="+userName;
+		statement = connection.createStatement();
+		int rows = statement.executeUpdate(sql);
+		System.out.println("刪除"+rows+"筆");
+	}
+	
+	
 	public void UpdateUserNameById(int userId,String userName) throws Exception {
 		String sql="UPDATE users SET name='"+userName+"' WHERE id ="+userId;
+		statement= connection.createStatement();
+//		statement.execute(sql);
+//		System.out.println("執行更新方法");
+//		executeUpdate 回傳整數值 增刪改時也可使用
+		int row = statement.executeUpdate(sql);
+		System.out.println("更新"+row+"筆");
+	}
+	
+	public void UpdateUserName(String userName,String newName) throws Exception {
+		String sql="UPDATE users SET name='"+newName+"' WHERE name ="+userName;
 		statement= connection.createStatement();
 //		statement.execute(sql);
 //		System.out.println("執行更新方法");
@@ -90,7 +108,8 @@ public class DemoCreateStatementCRUD {
 		statement=connection.createStatement();
 		ResultSet rs = statement.executeQuery(sql);
 		rs.next();
-		System.out.println(rs.getString("name")+","+rs.getString("password"));
+//		System.out.println(rs.getString("name")+","+rs.getString("id"));
+		System.out.println(rs.getString(1));
 	}
 	
 	public static void main(String[] args) {
@@ -102,6 +121,7 @@ public class DemoCreateStatementCRUD {
 //			demoCRUD.UpdateUserNameById(2, "banana");
 //			demoCRUD.findAllUsers();
 			demoCRUD.findUserById(2);
+//			demoCRUD.UpdateUserName("Ben","Ben1");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

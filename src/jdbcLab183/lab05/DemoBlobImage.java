@@ -15,6 +15,7 @@ import jdbcLab183.utils.JDBCutil;
 
 public class DemoBlobImage {
 	
+//	貓咪是Java程式工程師在電腦前面寫程式,coding,卡通風格
 	public void saveImage() {
 		String sql="INSERT INTO users(name,password,photo) VALUES(?,?,?)";
 		Connection connection = JDBCutil.getConnection();

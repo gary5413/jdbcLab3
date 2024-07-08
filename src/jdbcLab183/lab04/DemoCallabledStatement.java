@@ -1,4 +1,4 @@
-package jdbcLab179.lab04;
+package jdbcLab183.lab04;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -12,6 +12,18 @@ import jdbcLab179.utils.JDBCutil;
 public class DemoCallabledStatement {
 	/*
 	 * 非主流
+	 * 寫入最慢MySQL
+    	MySQL執行效能不錯
+		寫入最快Oracle
+
+		以前電腦效能不好
+		以前的工程師會使用callablestatement
+		但現在電腦都變好了
+		所以都使用電腦效能來處理
+
+		沒有out參數 才可以使用executeQuery()
+		只有輸入的參數
+		回傳就是ResultSet
 	 */
 	public void callProcedure(int userId) {
 		Connection connection = JDBCutil.getConnection();
