@@ -24,7 +24,7 @@ public class GetDataUtil {
 			String content = "";
 			while (bufferedReader.ready()) {
 				content = bufferedReader.readLine();
-				System.out.println(content);
+//				System.out.println(content);
 				list.add(content);
 			}
 //			刪除標頭
@@ -45,29 +45,33 @@ public class GetDataUtil {
 		return list;
 	}
 	
-	public static List<String> getUrl(String urlString) throws IOException{
+	public static List<String> getUrl(String urlString){
 		ArrayList<String> list = new ArrayList<String>();
-		URL url = new URL(urlString);
-		InputStream inputStream = url.openStream();
-		InputStreamReader inputStreamReader = new InputStreamReader(inputStream,"UTF-8");
-		BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-		
+		URL url;
 		try {
-			String content="";
-			while (bufferedReader.ready()) {
-				content = bufferedReader.readLine();
-//				System.out.println(content);
-//				加到list裏面
-				list.add(content);
+			url = new URL(urlString);
+			
+			try (InputStream inputStream = url.openStream();
+					InputStreamReader inputStreamReader = new InputStreamReader(inputStream,"UTF-8");
+					BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+					){
+				String content="";
+				while (bufferedReader.ready()) {
+					content = bufferedReader.readLine();
+//					System.out.println(content);
+//					加到list裏面
+					list.add(content);
+				}
+//				刪除第一筆
+				list.remove(0);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-//			刪除第一筆
-			list.remove(0);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			bufferedReader.close();
-			inputStreamReader.close();
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+
 		return list;
 	}
 }
