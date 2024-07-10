@@ -1,4 +1,4 @@
-package jdbcLab187.connectionPool;
+package jdbcLab187.connectionpool;
 
 import java.sql.Connection;
 import java.sql.SQLException;

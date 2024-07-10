@@ -7,10 +7,6 @@ import java.sql.Statement;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.zaxxer.hikari.HikariDataSource;
 
-
-
-
-
 public class DemoConnectionPool {
 	C3p0Util c3p0= new C3p0Util();
 	HikariUtil hikariCp= new HikariUtil();
