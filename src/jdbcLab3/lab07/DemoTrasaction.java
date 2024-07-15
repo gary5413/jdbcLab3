@@ -8,18 +8,22 @@ import jdbcLab3.util.JDBCutil;
 
 public class DemoTrasaction {
 	/*
-	 * 1. 什麼是資料庫事務
-	 * 		事務 一組邏輯操作單元 使資料從一種狀態轉到另一種狀態
+	 * 1. 什麼是資料庫交易(事務)
+	 * 		交易(事務) 一組邏輯操作單元 使資料從一種狀態轉到另一種狀態
 	 *  		> 一組邏輯操作單元 一個或多DML
+	 *  							資料操作語言：DML(Data Manipulation Language)用來處理資料表裡的資料。常見的指令UPDATE 更改資料表中的資料DELETE 刪除資料表中的資料
 	 * 2. 事務處理的原則 要所有事務都完成 就commit
 	 * 		如果過程中有出現異常 就rollback
 	 * 
 	 * 3. 資料一但commit 就不可rollback
 	 * 
 	 * 4. 哪些操作會導致資料自動提交
-	 * 		DDL 操作一但執行 都會自動提交
+	 * 		DDL 資料定義語言：DDL(Data Definition Language)
+	 * 			操作一但執行 都會自動提交
 	 * 			我們可以通過 set autocommit =false 方式取消 DML
-	 * 		DML 默認情況下 一但執行 就會自動提交
+	 * 			CREATE 建立資料庫的物件ALTER 變更資料庫的物件的結構DROP 刪除資料庫的物件TRUNCATE 清除資料庫表格內的資料
+	 * 		DML 資料操作語言：DML(Data Manipulation Language) 
+	 * 			默認情況下 一但執行 就會自動提交
 	 * 			我們可以通過 set autocommit =false 方式取消 DML
 	 * 		默認在關閉連接時,會自動提交
 	 * 
